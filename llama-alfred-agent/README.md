@@ -12,8 +12,10 @@ All of these will be required to keep Alfred on top of his game to ensure accura
 
 ### Project Structure
 
-`tools.py` holds all of the developed tools for Alfred
+`tools.py` holds all of the developed tools for Alfred. 
+
 `retriever.py` holds the retrieval logic for the RAG system's data parsing requirements
+
 `app.py` integrates all components together to build the fully functional tools for Alfred.
 
 The Guestbook and dataset is located on HuggingFace here: [Guestbook Dataset](https://huggingface.co/datasets/agents-course/unit3-invitees)
