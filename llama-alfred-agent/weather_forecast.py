@@ -1,5 +1,4 @@
 import datetime
-import json
 import unicodedata
 
 
@@ -35,13 +34,13 @@ class WeatherForecast:
         
         date_time = datetime.datetime.fromtimestamp(sunrise_unix)
         # Format the date and time as HH:MM
-        self.sunrise = date_time.strftime("%H:%M") + " AM"
+        self.sunrise = date_time.strftime("%H:%M")
         
         sunset_unix = response_text["sys"]["sunset"]
         
         date_time = datetime.datetime.fromtimestamp(sunset_unix)
         # Format the date and time as HH:MM
-        self.sunset = date_time.strftime("%H:%M") + " PM"
+        self.sunset = date_time.strftime("%H:%M")
 
 
     
