@@ -7,6 +7,8 @@ from huggingface_hub import login
 from dotenv import load_dotenv
 import os
 
+from tools import Tools
+
 import random
 
 from retriever import Retriever
@@ -52,6 +54,10 @@ async def main():
     
     HF_TOKEN = os.environ.get("HF_TOKEN")
     
+    OPEN_WEATHER_API_KEY = os.environ.get("OPEN_WEATHER_API_KEY")
+    
+    AIRNOW_API_KEY = os.environ.get("AIRNOW_API_KEY")
+    
     llm = HuggingFaceInferenceAPI(
         model_name="Qwen/Qwen2.5-Coder-32B-Instruct",
         token=HF_TOKEN,
@@ -60,10 +66,24 @@ async def main():
     
     print(colorama.Fore.WHITE + "-"*30)
     
-    print(colorama.Fore.YELLOW + "Creating Agent's Workflow")
+    print(colorama.Fore.YELLOW + "Initializing Agent's Tools... 🛠️")
+    
+    agent_tools = Tools(status_updates=True, weather_api_key=OPEN_WEATHER_API_KEY, air_now_api_key=AIRNOW_API_KEY).tool_belt
+    
+    found_tools = []
+    
+    found_tools.append(retriever.guest_info_tool)
+    
+    for tool in agent_tools:
+        found_tools.append(tool)
+        
+    print(colorama.Fore.WHITE + "-"*30)
+    
+    print(colorama.Fore.YELLOW + "Creating Agent's Workflow...")
+    
     
     alfred = AgentWorkflow.from_tools_or_functions(
-        [retriever.guest_info_tool],
+        found_tools,
         llm=llm
     )
     
@@ -71,7 +91,6 @@ async def main():
     print(colorama.Fore.WHITE + "-"*30)
     
     await prompt_agent(agent_provider=alfred)
-    
 
 
 if __name__ == "__main__":
