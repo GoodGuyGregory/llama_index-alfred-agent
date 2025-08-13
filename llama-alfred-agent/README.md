@@ -35,4 +35,15 @@ looking over the dataset there are 4 columns for RAG:
 | Description | a brief description of the guest for small reference and conversation | 
 | email | for sharing any interesting articles or links you fancy or keep in contact  |
 
+### Llama Index Tools: 
+
+initally there is quite a learning curve to importing tools. I had to dig around for quite a while. but the syntax is basically as mentioned above. if there is an error with the tool missing try importing it with uv 
+
+`uv add llama-index-{tool-name-here}`
+
+#### Duck Duck Go Search
+
+[Duck Duck Go Reference](https://docs.llamaindex.ai/en/stable/api_reference/tools/duckduckgo/)
+
+there are basically two tools on the site, we will leverage `full_search` in the project.
 
